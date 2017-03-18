@@ -1,6 +1,6 @@
 # yahooWeatherAPIExample
 
-###Instructions:
+### Instructions:
 * Make sure you have a working server with PHP 5.4+
 * git clone https://github.com/crypton480/yahooWeatherAPIExample/
 * cd yahooWeatherAPIExample/
