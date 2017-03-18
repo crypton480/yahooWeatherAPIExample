@@ -4,7 +4,7 @@ require_once("Weather.php");
 require_once("html_table.class.php"); //One of my favorite libraries. Does not have a composer package though!
 
 //Need a city and region
-if(!isset($_GET['city']) || !isset($_GET['region'])) {
+if(empty($_GET['city']) || empty($_GET['region'])) {
   header("Location: list.php");
   die();
 }
