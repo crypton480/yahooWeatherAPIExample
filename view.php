@@ -1,6 +1,7 @@
 <?php
 
 require_once("Weather.php");
+require_once("html_table.class.php"); //One of my favorite libraries. Does not have a composer package though!
 
 if(!isset($_GET['city']) || !isset($_GET['region'])) {
   header("Location: list.php");
@@ -10,45 +11,29 @@ if(!isset($_GET['city']) || !isset($_GET['region'])) {
 $city = $_GET['city'];
 $region = $_GET['region'];
 
+echo "<h1>".$city."</h1>";
+
 $weather = new Weather;
 $response = $weather->fiveDayInfo($city, $region);
-?>
 
-<h1><?php echo $city ?></h1>
+$tbl = new HTML_Table('', 'forecast_table');
 
-<table>
-  <col width="100">
-  <col width="80">
-  <col width="150">
-  <col width="100">
-  <col width="100">
-  <tr>
-    <th align="left">
-      Date
-    </th>
-    <th align="left" colspan="2">
-      Conditions
-    </th>
-    <th align="left">
-      High
-    </th>
-    <th align="left">
-      Low
-    </th>
-  </tr>
-<?php
+$tbl->addRow();
+$tbl->addCell('Date', '', 'header', ["width"=>"100", "align" => "left"]);
+$tbl->addCell('Conditions', '', 'header', ["width"=>"230" , "colspan" => 2, "align" => "left"]);
+$tbl->addCell('High', '', 'header', ["width"=>"100", "align" => "left"]);
+$tbl->addCell('Low', '', 'header', ["width"=>"100", "align" => "left"]);
+
 foreach ($response as $day) {
-  echo "<tr>";
-  echo "<td>".$day->date."</td>";
-  echo "<td><img src=http://l.yimg.com/a/i/us/we/52/".$day->code.".gif></td>";
-  echo "<td>".$day->text."</td>";
-  echo "<td>".$day->high."</td>";
-  echo "<td>".$day->low."</td>";
-  echo "</tr>";
-
+  $tbl->addRow();
+  $tbl->addCell($day->date);
+  $tbl->addCell("<img src=http://l.yimg.com/a/i/us/we/52/".$day->code.".gif>");
+  $tbl->addCell($day->text);
+  $tbl->addCell($day->high);
+  $tbl->addCell($day->low);
 }
-?>
-</table>
 
-<BR>
-<a href='list.php'>Return to list</a>
+echo $tbl->display();
+echo "<a href='list.php'>Return to list</a>";
+
+?>
