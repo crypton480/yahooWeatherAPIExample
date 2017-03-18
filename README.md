@@ -5,4 +5,4 @@
 * git clone https://github.com/crypton480/yahooWeatherAPIExample/
 * cd yahooWeatherAPIExample/
 * composer install
-* Go to http://path/to/yahooWeatherAPIExample/.list.php
+* Go to http://path/to/yahooWeatherAPIExample/list.php
