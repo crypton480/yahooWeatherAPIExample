@@ -8,11 +8,13 @@ $query = json_decode('[{"city": "Vancouver", "region": "BC", "country" : "Canada
           {"city": "San Diego", "region": "CA", "country" : "United States" },
           {"city": "Havana", "region": "CH", "country": "Cuba"} ]');
 
+//API Call
 $weather = new Weather;
 $response = $weather->weatherList($query);
 
 echo "<h1>Weather List</h1>";
 
+//Format response in a table using the HTML_Table class
 $tbl = new HTML_Table('', 'city_table');
 
 $tbl->addRow();
@@ -31,6 +33,8 @@ foreach (json_decode($response) as $city) {
   $tbl->addCell($city->low);
 }
 
+
+//Display the table
 echo $tbl->display();
 
 ?>

@@ -3,6 +3,7 @@
 require_once("Weather.php");
 require_once("html_table.class.php"); //One of my favorite libraries. Does not have a composer package though!
 
+//Need a city and region
 if(!isset($_GET['city']) || !isset($_GET['region'])) {
   header("Location: list.php");
   die();
@@ -13,9 +14,11 @@ $region = $_GET['region'];
 
 echo "<h1>".$city."</h1>";
 
+//API Call
 $weather = new Weather;
 $response = $weather->fiveDayInfo($city, $region);
 
+//Format response in a table using the HTML_Table class
 $tbl = new HTML_Table('', 'forecast_table');
 
 $tbl->addRow();
@@ -33,6 +36,7 @@ foreach ($response as $day) {
   $tbl->addCell($day->low);
 }
 
+//Display the table
 echo $tbl->display();
 echo "<a href='list.php'>Return to list</a>";
 
