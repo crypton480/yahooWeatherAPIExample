@@ -14,6 +14,12 @@ $response = $weather->weatherList($query);
 
 echo "<h1>Weather List</h1>";
 
+//If the API call fails
+if(empty(json_decode($response))) {
+  echo "Something went wrong! Please try again later.";
+  die;
+}
+
 //Format response in a table using the HTML_Table class
 $tbl = new HTML_Table('', 'city_table');
 

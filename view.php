@@ -18,6 +18,13 @@ echo "<h1>".$city."</h1>";
 $weather = new Weather;
 $response = $weather->fiveDayInfo($city, $region);
 
+//If the API call fails
+if(empty($response)) {
+  echo "Something went wrong! Please try again later.";
+  echo "<BR><a href='list.php'>Return to list</a>";
+  die;
+}
+
 //Format response in a table using the HTML_Table class
 $tbl = new HTML_Table('', 'forecast_table');
 
